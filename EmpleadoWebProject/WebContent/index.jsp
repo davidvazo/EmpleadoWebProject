@@ -19,7 +19,7 @@
 </li>
 <li>Menu Departamento
 	<ul>
-	<li>Alta departamento</li>
+	<li>Alta Departamento</li>
 	<li>Borrar departamento</li>
 	<li>Cambios departamento</li>
 	<li>Consultar departamento</li>
