@@ -2,7 +2,7 @@ $(document).ready(function() {
     $('#submit').click(function() {
         $.ajax({
         	type: "POST",
-            url : 'UserServlet',
+            url : '../../UserServlet',
             data : {
             	ssn : $('#ssn').val(),
             	nombre : $('#nombre').val(),
@@ -11,7 +11,7 @@ $(document).ready(function() {
             	curp : $('#curp').val()
             },
             success : function(response) {
-            	alert("Exitoso");
+            	alert(response);
             }
         });  /* ajax() */
    }); /* #submit() */
