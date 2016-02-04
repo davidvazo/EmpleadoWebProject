@@ -7,6 +7,13 @@
 <title>Insert title here</title>
 </head>
 <body>
-
+	<h1>Index Departamento</h1>
+	
+	<ul>
+		<li><a href="altaDepartamento.jsp">Alta de Departamento</a></li>
+		<li><a href="borrarDepartamento.jsp">Borrar Departamento</a></li>
+		<li><a href="cambiosDepartamento.jsp">Cambiar Departamento</a></li>
+		<li><a href="consultarDepartamento.jsp">Consultar Departamento</a></li>
+	</ul>
 </body>
 </html>
