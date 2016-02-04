@@ -35,7 +35,7 @@ public class UserServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		String msg = "En User Servlet";
+		String msg = "En User Servlet...";
 		
 		response.setContentType("text/plain");
 		response.setCharacterEncoding("UTF-8");
