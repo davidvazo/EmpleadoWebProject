@@ -1,14 +1,15 @@
 $(document).ready(function() {
     $('#submit').click(function() {
-        $.ajax({
+    	$.ajax({
         	type: "POST",
-            url : '../../UserServlet',
+            url : 'UserServlet',
             data : {
             	ssn : $('#ssn').val(),
             	nombre : $('#nombre').val(),
             	edad : $('#edad').val(),
             	sueldo : $('#sueldo').val(),
             	curp : $('#curp').val()
+            	
             },
             success : function(response) {
             	alert(response);

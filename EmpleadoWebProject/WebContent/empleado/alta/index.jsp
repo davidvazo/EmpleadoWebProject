@@ -7,18 +7,10 @@
 <script type="text/javascript" src="../../js/jquery-2.1.4.min.js"></script>
 <script type="text/javascript" src="alta.js"></script>
 <title>Alta de empleados</title>
-<<style>
-body {
-	background-color: #333;
-	color: #FFF;
-}
-</style>
+
 </head>
 <body>
-
 <h1>Alta  de empleados</h1>
-
-
 <form id="formulario" name="formulario">
 
 <h3>Ingrese los siguientes campos, todos son requeridos</h3>

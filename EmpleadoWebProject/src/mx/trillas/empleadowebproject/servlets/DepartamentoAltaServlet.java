@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 /**
  * Servlet implementation class DepartamentoAltaServlet
  */
-@WebServlet(description = "alta de Departamento Nuevos", urlPatterns = { "/DepartamentoAltaServlet" })
+@WebServlet(description = "alta de Departamento Nuevos", urlPatterns = { "/departamento/alta/DepartamentoAltaServlet" })
 public class DepartamentoAltaServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
