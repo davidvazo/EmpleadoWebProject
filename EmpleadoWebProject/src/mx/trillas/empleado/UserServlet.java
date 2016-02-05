@@ -4,14 +4,21 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.json.Json;
+import javax.json.JsonObject;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
+import org.json.JSONArray;
+
+//import com.google.gson.JsonObject;
+
+//import com.google.gson.Gson;
+//import com.google.gson.GsonBuilder;
+
 
 /**
  * Servlet implementation class UserServlet
@@ -41,7 +48,6 @@ public class UserServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws NumberFormatException, ServletException, IOException {
-		// TODO Auto-generated method stub
 		
 		boolean success = true;
 		String message = "";
@@ -78,7 +84,7 @@ public class UserServlet extends HttpServlet {
 			if (curp.equals("")) {
 				success = false;
 				message += "|El nombre no debe ir vacío";
-				inputerror.add("nombre");
+				inputerror.add("curp");
 			}
 		}
 		
@@ -113,21 +119,19 @@ public class UserServlet extends HttpServlet {
 				inputerror.add("sueldo");
 			}
 		}
-
-		Gson gson =  new Gson();
-		Gson gson2 =  new GsonBuilder().create();
 		
-		/*
-		String json = gson.toJson(edad); 
+		JSONArray jsonArray = new JSONArray(inputerror);
+		
+		JsonObject obj = Json.createObjectBuilder().add("success", success)
+				.add("message", message)
+				.add("datos", "")
+				.add("inputerror", jsonArray.toString()).build();
 		 
+		System.out.println("json: " + obj);
+
 		response.setContentType("application/json");
 		response.setCharacterEncoding("UTF-8");
-		response.getWriter().write(json);
-			
-		/*
-		response.setContentType("text/plain");
-		response.setCharacterEncoding("UTF-8");
-		response.getWriter().write("Estoy en User servlet...");
-		*/
+		response.getWriter().write(obj.toString());
+		
 	}
 }

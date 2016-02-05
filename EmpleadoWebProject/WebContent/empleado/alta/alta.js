@@ -11,10 +11,9 @@ $(document).ready(function() {
             	curp : $('#curp').val()
             	
             },
-            /*dataType: 'json',*/
             success : function(response) {
             	alert(response);
             }
         });  /* ajax() */
-   }); /* #submit() */
+   }); /* #submit() */s
 }); /* document() */
