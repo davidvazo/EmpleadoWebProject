@@ -4,15 +4,23 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.json.Json;
-import javax.json.JsonObject;
+//import javax.json.Json;
+//import javax.json.JsonObject;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.json.JSONArray;
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+
+//import org.json.JSONArray;
+
+//import com.google.gson.JsonObject;
+
+//import org.json.JSONArray;
+//import org.json.JSONException;
 
 //import com.google.gson.JsonObject;
 
@@ -23,7 +31,7 @@ import org.json.JSONArray;
 /**
  * Servlet implementation class UserServlet
  */
-@WebServlet("/empleado/alta/UserServlet")
+@WebServlet("/empleado/alta/EmpleadoServlet")
 public class EmpleadoServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -39,15 +47,13 @@ public class EmpleadoServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-//		doPost(request,response);
 
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws NumberFormatException, ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws   NumberFormatException, ServletException, IOException {
 		
 		boolean success = true;
 		String message = "";
@@ -120,18 +126,34 @@ public class EmpleadoServlet extends HttpServlet {
 			}
 		}
 		
-		JSONArray jsonArray = new JSONArray(inputerror);
 		
-		JsonObject obj = Json.createObjectBuilder().add("success", success)
-				.add("message", message)
-				.add("datos", "")
-				.add("inputerror", jsonArray.toString()).build();
+		
+		JSONArray jsonArray = new JSONArray();
+//		JsonObject obj =null;
+		String value1 = "";
+		/*
+		for (int i = 0; i< jsonArray.length(); i++ ){
+				try {
+					value1 = jsonArray.getString(i);
+					System.out.println("value" + i + " : " + value1);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+		}
+		*/
+		JSONObject obj = new JSONObject();
+//		JsonObject obj = Json.createObjectBuilder().add("success", success)
+				obj.put("success", success);
+				obj.put("message", message);
+				obj.put("datos", "");
+				obj.put("inputerror", inputerror);
 		 
 		System.out.println("json: " + obj);
 
+//		response.sendError(HttpServletResponse.SC_NOT_ACCEPTABLE);
+		
 		response.setContentType("application/json");
 		response.setCharacterEncoding("UTF-8");
 		response.getWriter().write(obj.toString());
-		
 	}
 }
