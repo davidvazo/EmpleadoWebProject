@@ -14,8 +14,8 @@
 		<form  id="formAltaDepartamento" name="formAltaDepartamento">
 			<ul>
 				<li><label>Nombre del Departamento</label></li>
-				<li><input type="text" name="nombreDepartamento" /></li>
-				<li><input type="text" name="nombrePurbea" /></li>
+				<li><input type="text" name="departamento" /></li>
+				<li><input type="text" name="prueba" /></li>
 				<li><input type="button" value="Enviar" id ="submit"/></li>
 			</ul>
 		</form>		

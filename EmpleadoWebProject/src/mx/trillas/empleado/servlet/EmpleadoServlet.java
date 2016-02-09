@@ -1,4 +1,4 @@
-package mx.trillas.empleado;
+package mx.trillas.empleado.servlet;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -24,13 +24,13 @@ import org.json.JSONArray;
  * Servlet implementation class UserServlet
  */
 @WebServlet("/empleado/alta/UserServlet")
-public class UserServlet extends HttpServlet {
+public class EmpleadoServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public UserServlet() {
+    public EmpleadoServlet() {
         super();
         // TODO Auto-generated constructor stub
     }

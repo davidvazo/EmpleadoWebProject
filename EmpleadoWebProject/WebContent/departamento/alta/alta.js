@@ -1,21 +1,14 @@
 $(document).ready(function() {
-    $('#submit').click(function() {
-    	alert($("#formAltaDepartamento").serialize());
+    $('#submit').click(function() {    	
     	$.ajax({
 			type: "POST",
 			url: "DepartamentoAltaServlet",
 			data:$("#formAltaDepartamento").serialize(),
-			success: function(data){
-				 var error=data;
-					if(data == ""){
-						alert('El departamento fue guardado exitosamente');
-					}else{
-			        	alert('Se encontro un Error al guardar el departamento __'+error);
-					}
-	        reset('departamentoAltaForm');
+			success: function(response){				
+				alert(response);
 	    },error:function(data){
 	    	 alert('Se encontro un Error al guardar departamento');
 	    }
-    	}); /* $.ajax */
-    }); /* #submit.click() */
+    }); /* $.ajax */
+  }); /* #submit.click() */
 }); /* (document).ready   */
