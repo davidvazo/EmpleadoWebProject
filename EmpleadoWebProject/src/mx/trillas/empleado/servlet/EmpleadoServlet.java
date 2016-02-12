@@ -3,9 +3,9 @@ package mx.trillas.empleado.servlet;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
-//import javax.json.Json;
-//import javax.json.JsonObject;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -14,19 +14,6 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
-
-//import org.json.JSONArray;
-
-//import com.google.gson.JsonObject;
-
-//import org.json.JSONArray;
-//import org.json.JSONException;
-
-//import com.google.gson.JsonObject;
-
-//import com.google.gson.Gson;
-//import com.google.gson.GsonBuilder;
-
 
 /**
  * Servlet implementation class UserServlet
@@ -53,59 +40,81 @@ public class EmpleadoServlet extends HttpServlet {
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
+	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws   NumberFormatException, ServletException, IOException {
 		
 		boolean success = true;
 		String message = "";
 		List<String> inputerror = new ArrayList<>();
-		String edad = "";
 		
 		if (request.getParameterMap().containsKey("ssn")) {
 			String ssn = request.getParameter("ssn");
 			if (!ssn.equals("")) {
-				try {
-					int intSsn = Integer.parseInt(ssn);
-				}catch(NumberFormatException e){
-					throw e;
+				if (vericarDatosNumerico(ssn)){
+					try {
+						int intSsn = Integer.parseInt(ssn);
+					}catch(NumberFormatException e){
+						throw e;
+					}
+				} else {
+					success = false;
+					message += "El campo ssn solo acepta numeros";
+					inputerror.add("ssn");
 				}
-				
 			} else {
 				success = false;
-				message += "|El ssn no debe ir vacío";
+				message += "El campo ssn no debe ir vacío";
 				inputerror.add("ssn");
 			}
 		}
 		
 		if (request.getParameterMap().containsKey("nombre")) {
 			String nombre = request.getParameter("nombre");
-			if (nombre.equals("")) {
+			if (!nombre.equals("")) {
+				if (!vericarDatosLetras(nombre)){
+					success = false;
+					message += "| El campo nombre solo acepta texto";
+					inputerror.add("nombre");
+				}
+			} else {
 				success = false;
-				message += "|El nombre no debe ir vacío";
+				message += "| El campo nombre no debe ir vacío";
 				inputerror.add("nombre");
 			}
 		}
 		
 		if (request.getParameterMap().containsKey("curp")) {
 			String curp = request.getParameter("curp");
-			if (curp.equals("")) {
+			if (!curp.equals("")) {
+				if (!vericarCurp(curp)){
+					success = false;
+					message += "| El campo Curp no es valido";
+					inputerror.add("curp");
+				}
+			} else {
 				success = false;
-				message += "|El nombre no debe ir vacío";
+				message += "| El campo Curp no debe ir vacío";
 				inputerror.add("curp");
 			}
 		}
 		
 		if (request.getParameterMap().containsKey("edad")) {
-			edad = request.getParameter("edad");
+			String edad = request.getParameter("edad");
 			if (!edad.equals("")) {
-				try {
-					int intEdad = Integer.parseInt(edad);
-				}catch(NumberFormatException e){
-					throw e;
+				if (!vericarDatosNumerico(edad)){
+					success = false;
+					message += "| El campo Edad solo acepta numeros";
+					inputerror.add("edad");
+				} else { 
+					try {
+						int intEdad = Integer.parseInt(edad);
+					}catch(NumberFormatException e){
+						throw e;
+					}
 				}
-				
 			} else {
 				success = false;
-				message += "|Campo edad no debe ir vacío";
+				message += "| El campo  edad no debe ir vacío";
 				inputerror.add("edad");
 			}
 		}
@@ -113,47 +122,65 @@ public class EmpleadoServlet extends HttpServlet {
 		if (request.getParameterMap().containsKey("sueldo")) {
 			String sueldo = request.getParameter("sueldo");
 			if (!sueldo.equals("")) {
-				try {
-					int intSueldo = Integer.parseInt(sueldo);
-				}catch(NumberFormatException e){
-					throw e;
+				if (!vericarDatosNumerico(sueldo)){
+					success = false;
+					message += "| El campo Sueldo solo acepta numeros";
+					inputerror.add("sueldo");
+				} else {
+					try {
+						int intSueldo = Integer.parseInt(sueldo);
+					}catch(NumberFormatException e){
+						throw e;
+					}
 				}
-				
 			} else {
 				success = false;
-				message += "|Campo sueldo no debe ir vacío";
+				message += "| El campo  sueldo no debe ir vacío";
 				inputerror.add("sueldo");
 			}
 		}
 		
-		
-		
 		JSONArray jsonArray = new JSONArray();
-//		JsonObject obj =null;
 		String value1 = "";
-		/*
-		for (int i = 0; i< jsonArray.length(); i++ ){
-				try {
-					value1 = jsonArray.getString(i);
-					System.out.println("value" + i + " : " + value1);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-		}
-		*/
+
 		JSONObject obj = new JSONObject();
-//		JsonObject obj = Json.createObjectBuilder().add("success", success)
 				obj.put("success", success);
 				obj.put("message", message);
 				obj.put("datos", "");
 				obj.put("inputerror", inputerror);
-		 
-		System.out.println("json: " + obj);
-
+				
+//		System.out.println("json: " + obj);
 //		response.sendError(HttpServletResponse.SC_NOT_ACCEPTABLE);
 		
 		response.setContentType("application/json");
 		response.setCharacterEncoding("UTF-8");
 		response.getWriter().write(obj.toString());
+	}
+	
+	public static boolean vericarDatosLetras(String alph){
+		String regex = "([A-Za-z])+";
+		Pattern pattern = Pattern.compile(regex);
+		Matcher matcher = pattern.matcher(alph);
+		return matcher.matches();
+	}
+	
+	public static boolean vericarCurp(String curp){
+		String regex = "^[A-Z]{1}[AEIOU]{1}[A-Z]{2}";
+		regex += "[0-9]{2}(0[1-9]|1[0-2])(0[1-9]|1[0-9]|2[0-9]|3[0-1])";
+		regex += "[HM]{1}";
+		regex += "(AS|BC|BS|CC|CS|CH|CL|CM|DF|DG|GT|GR|HG|JC|MC|MN|MS|NT|NL|OCPLQT|QR|SP|SL|SR|TC|TS)";
+		regex += "[B-DF-HJ-NP-TV-Z]{3}";
+		regex += "[0-9A-Z]{1}";
+		regex += "[0-9]{1}$";
+		Pattern pattern = Pattern.compile(regex);
+		Matcher matcher = pattern.matcher(curp);
+		return matcher.matches();
+	}
+	
+	public static boolean vericarDatosNumerico(String numeric){
+		String regex = "([0-9])+";
+		Pattern pattern = Pattern.compile(regex);
+		Matcher matcher = pattern.matcher(numeric);
+		return matcher.matches();
 	}
 }

@@ -14,6 +14,12 @@
 	color: red;
 }
 .normal {
+	background-color: white;
+	color: black;
+}
+body {
+	background-color: #333;
+	color: white;
 }
 </style>
 
@@ -25,11 +31,11 @@
 <h3>Ingrese los siguientes campos, todos son requeridos</h3>
 
 <ul>
-<li><label>Ingrese SSN</label> <input id="ssn" name="ssn" class="normal" type="text" placehold="Ingrese ssn"  /></li> <br>
-<li><label>Ingrese nombre</label> <input id="nombre" name="nombre"  class="normal"  type="text" placehold="Ingrese nombre"  /></li> <br>
-<li><label>Ingrese edad</label> <input id="edad" name="edad" type="text"  class="normal"  placehold="Ingrese edad"  /></li> <br>
-<li><label>Ingrese sueldo</label> <input id="sueldo" name="sueldo" type="text"  class="normal"  placehold="Ingrese sueldo"  /></li> <br>
-<li><label>Ingrese Curp</label> <input id="curp" name="curp" type="text"  class="normal"  placehold="Ingrese Curp"  /></li> <br>
+	<li><label>Ingrese SSN</label> <input id="ssn" name="ssn" class="normal" maxlength="4" type="text" placehold="Ingrese ssn"  /></li> <br>
+	<li><label>Ingrese nombre</label> <input id="nombre" name="nombre" class="normal" type="text" placehold="Ingrese nombre"  /></li> <br>
+	<li><label>Ingrese edad</label> <input id="edad" name="edad" type="text" maxlength="2" class="normal"  placehold="Ingrese edad"  /></li> <br>
+	<li><label>Ingrese sueldo</label> <input id="sueldo" name="sueldo" type="text" class="normal"  placehold="Ingrese sueldo"  /></li> <br>
+	<li><label>Ingrese Curp</label> <input id="curp" name="curp" type="text" class="normal" placehold="Ingrese Curp"  /></li> <br>
 </ul>
 
 <button id="submit" name="submit" type="button" >Aceptar</button>

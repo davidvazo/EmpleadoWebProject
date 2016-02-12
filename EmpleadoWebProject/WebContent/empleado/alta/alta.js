@@ -1,9 +1,8 @@
 $(document).ready(function() {
-	
-    $('#submit').click(function() {
-/*    	$(".anormal").addClass("normal");   */
+   $('#submit').click(function() {
+    	$(".anormal").addClass("normal");   
     	$.ajax({
-        	type: "POST",
+        	type : "POST",
             url : 'EmpleadoServlet',
             dataType: "json",
             data : {
@@ -12,26 +11,23 @@ $(document).ready(function() {
             	edad : $('#edad').val(),
             	sueldo : $('#sueldo').val(),
             	curp : $('#curp').val()
-            	
             },
-            error:function(data) {
-            	alert("Error: Contacte al administrador ja-ja \n Codigo de error: "+ data.status);
-            	
+            error : function(data) {
+            	alert("Error: Contacte al administrador \n Codigo de error: " + data.status);
             	console.log("");
             },
             success : function(data) {
             	if (data.success == true  ){
             		console.log(data);
             	} else {
-            		
-            		var foo = data.message.replace("|","\n");
+            		var foo = data.message.replace(/[|]/g,"\n");
             		alert(foo);
             		
-            		for(var i=0; i<data.inputerror.length; i++){
-            			var aidi = data.inputerror[i];
-            			$("#"+aidi).removeClass();
-            			$("#"+aidi).addClass("anormal");
-            			console.log("aiid: " + aidi);
+            		for( var i = 0; i < data.inputerror.length; i ++ ){
+            			var id = data.inputerror[i];
+            			$("#" + id).removeClass();
+            			$("#" + id).addClass("anormal");
+            			console.log("id: " + id);
             		}
             	}
             }
